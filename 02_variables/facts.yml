@@ -1,0 +1,5 @@
+- name: Print out the host name
+  hosts: all
+  tasks:
+    - script: echo "{{ ansible_hostname }}"
+

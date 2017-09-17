@@ -1,0 +1,13 @@
+- name: Print out the host name
+  hosts: all
+  tasks:
+    - name: On windows hosts, make sure the telnet client is installed
+      win_feature:
+        name: telnet-client
+      when: ansible_os_family == 'Windows'
+
+    - name: On Debian hosts, make sure the telnet client is installed
+      apt:
+        name: telnet
+      when: ansible_os_family == 'Debian'
+

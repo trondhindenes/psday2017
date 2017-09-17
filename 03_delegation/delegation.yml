@@ -1,0 +1,9 @@
+- name: Delegation stuff
+  hosts: all
+  tasks:
+    - name: Print the target node name
+      shell: echo "{{ ansible_hostname }}"
+      delegate_to: localhost
+    - name: Print the target node ip address
+      shell: echo "{{ ansible_ip_addresses[0] }}"
+      delegate_to: localhost

@@ -1,0 +1,18 @@
+[all]
+
+[all:children]
+webservers
+appservers
+
+[webservers]
+psday1 ansible_host=192.168.56.101
+
+[appservers]
+psday2 ansible_host=192.168.56.102
+
+[all:vars]
+ansible_connection=winrm
+ansible_port=5986
+ansible_password=MyPassword
+ansible_user=Administrator
+ansible_winrm_server_cert_validation=ignore

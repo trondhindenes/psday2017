@@ -1,0 +1,24 @@
+- name: Do things with DSC
+  serial: 1
+  hosts: all
+  tasks:
+
+    - name: Create a group
+      win_dsc:
+        resource_name: group
+        GroupName: GroupyGroup
+
+    - name: Create a group using delegation
+      win_dsc:
+        resource_name: group
+        GroupName: "{{ ansible_hostname }}-computergroup"
+      delegate_to: "{{ groups.appservers[0] }}"
+
+    - name: Create a group
+      win_dsc:
+        resource_name: group
+        GroupName: "{{ item }}"
+      with_items:
+        - Developers
+        - Admin
+        - daCEO

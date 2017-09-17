@@ -1,0 +1,21 @@
+- name: Testing the module
+  hosts: all
+  tasks:
+    - name: Create a nice file
+      my_first_module:
+        file_name: testfile.txt
+        file_contents: Hello
+
+    - name: Create a nice file using vars
+      my_first_module:
+        file_name: computername.txt
+        file_contents: "{{ inventory_hostname }}"
+
+    - name: Create a nice file using vars
+      my_first_module:
+        file_name: "{{ ansible_hostname }}.txt"
+        file_contents: "{{ ansible_distribution }}"
+
+    - name: Test if it fails
+      my_first_module:
+        file_name: "{{ ansible_hostname }}.txt"

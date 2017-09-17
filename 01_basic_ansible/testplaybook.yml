@@ -1,0 +1,13 @@
+- name: Install the required things
+  hosts: all
+  tasks:
+    - name: Make sure the telnet client is present
+      win_feature:
+        name: telnet-client
+
+    - name: Make sure the print spooler service is running
+      win_service:
+        name: spooler
+        state: started
+      tags:
+        - mytag

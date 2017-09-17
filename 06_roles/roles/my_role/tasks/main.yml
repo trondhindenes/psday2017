@@ -1,0 +1,23 @@
+- name: print the thing
+  debug:
+    msg: "Installing feature {{ win_feature_name }}"
+
+- name: Install the requested feature
+  win_feature:
+    name: "{{ win_feature_name }}"
+  register: win_feature_result
+
+- name: make sure audio service is running
+  win_service:
+    name: audiosrv
+    state: started
+
+- name: Report it
+  win_say:
+    msg: "target node {{ ansible_hostname }}: Changes were made"
+  when: (win_feature_result.changed) and say_stuff
+
+- name: Report it
+  win_say:
+    msg: "target node {{ ansible_hostname }}: No changes were made"
+  when: (not win_feature_result.changed) and say_stuff

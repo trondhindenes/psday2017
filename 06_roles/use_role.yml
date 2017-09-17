@@ -1,0 +1,15 @@
+- name: Use a role (old-school)
+  hosts: all
+  roles:
+    - my_role
+
+- name: Use a role (new-school)
+  hosts: all
+  serial: 1
+  tasks:
+    - name: use the role
+      include_role:
+        name: my_role
+      vars:
+        win_feature_name: snmp-service
+        say_stuff: yes
